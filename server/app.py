@@ -18,3 +18,57 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 db.init_app(app)
 
 migrate = Migrate(app, db)
+
+
+@app.route('/')
+def index ():
+    return jsonify({
+        "message": "Superheroes API",
+        "endpoints": {
+            "heroes": "/heroes",           
+            "hero_by_id": "/heroes/:id",      
+            "powers": "/powers",             
+            "power_by_id": "/powers/:id",   
+            "hero_powers": "/hero_powers"     
+        }
+    })
+
+
+
+@app.route('/heroes', methods=['GET'])
+def get_heroes():
+    heroes = Hero.query.all()
+
+    heroes_list = [
+        hero.to_dict(only=('id', 'name', 'super_name')) for hero in heroes
+        for hero in heroes
+    ]
+
+    return jsonify(heroes_list), 200
+
+
+@app.route('/heroes/<int:id>', methods=['GET'])
+def get_hero_by_id(id):
+
+    hero = Hero.query.filter_by(id=id).first()
+
+    if not hero:
+        return jsonify({"error": "Hero not found"}), 404
+    
+
+    hero_dict = hero.to_dict(only=(
+        'id',
+        'name',
+        'super_name',
+        'hero_powers.id',
+        'hero_powers.hero_id',
+        'hero_powers.power_id',
+        'hero_powers.strength',
+        'hero_powers.power.id',
+        'hero_powers.power.name',
+        'hero_powers.power.description'
+        
+
+    ))
+
+    return jsonify(hero_dict), 200
