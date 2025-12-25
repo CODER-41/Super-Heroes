@@ -76,4 +76,35 @@ def seed_database():
             )
         ]
 
-        
+        db.session.add_all(powers)
+        db.session.commit()
+        print(f"Created {len(powers)} powers")
+
+        print("Creating hero-power associations...")
+
+        stregths = ['Strong', 'Weak', 'Average']
+
+        hero_power = [
+            
+            HeroPower(hero_id=1, power_id=2, strength = "Strong"),
+
+            HeroPower(hero_id=1, power_id=4, strength="Average"), 
+            HeroPower(hero_id=2, power_id=1, strength="Strong"),   
+            HeroPower(hero_id=3, power_id=1, strength="Average"),  
+            HeroPower(hero_id=3, power_id=3, strength="Strong"),   
+            HeroPower(hero_id=4, power_id=2, strength="Strong"),   
+            HeroPower(hero_id=5, power_id=5, strength="Strong"),   
+            HeroPower(hero_id=5, power_id=6, strength="Strong"),   
+            HeroPower(hero_id=6, power_id=2, strength="Strong"),   
+            HeroPower(hero_id=6, power_id=1, strength="Strong"),   
+            HeroPower(hero_id=7, power_id=7, strength="Strong"),   
+            HeroPower(hero_id=7, power_id=5, strength="Strong"),   
+            HeroPower(hero_id=8, power_id=8, strength="Strong"),   
+            HeroPower(hero_id=8, power_id=2, strength="Average"),  
+            HeroPower(hero_id=9, power_id=9, strength="Strong"),   
+            HeroPower(hero_id=10, power_id=10, strength="Strong")
+        ]
+
+        db.session.add_all(hero_power)
+        db.session.commit()
+        print(f"Created {len(hero_power)} hero-power associations")
