@@ -81,14 +81,14 @@ class HeroPower(db.Model, SerializerMixin):
 
 
     hero = db.relationship('Hero', back_populates = 'hero_powers')
-    hero = db.relationship('Power', back_populates = 'hero_powers')
+    power = db.relationship('Power', back_populates = 'hero_powers')
 
     serialize_rules = ('-hero.hero_powers', '-power.hero_powers')
 
     @validates('strength')
     def validate_strength(self, key, strength):
 
-        allowed_strength = ['strong', 'Weak', 'Average']
+        allowed_strength = ['Strong', 'Weak', 'Average']
         if strength not in allowed_strength:
             raise ValueError(f"Strength must be one of : {', '.join(allowed_strength)}")
         return strength

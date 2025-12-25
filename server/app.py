@@ -86,7 +86,7 @@ def get_power(id):
 
     return jsonify(power_dict), 200
 
-@app.route('/powers<int:id>', methods=['PATCH'])
+@app.route('/powers/<int:id>', methods=['PATCH'])
 def update_power(id):
 
     power = Power.query.get(id)

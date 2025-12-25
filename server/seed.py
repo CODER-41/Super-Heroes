@@ -33,7 +33,7 @@ def seed_database():
 
         print("Creating powers...")
 
-        power = [
+        powers = [
             Power(
                 name="super strength",
                 description="gives the wielder super-human strengths"
