@@ -108,3 +108,10 @@ def seed_database():
         db.session.add_all(hero_power)
         db.session.commit()
         print(f"Created {len(hero_power)} hero-power associations")
+
+        print("Database seeded successfully!")
+
+
+
+if __name__ == '__main__':
+    seed_database()
